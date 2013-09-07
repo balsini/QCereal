@@ -3,20 +3,24 @@
 
 #include <QMainWindow>
 
-namespace Ui {
-class MainWindow;
-}
+#include "ui_mainwindow.h"
 
-class MainWindow : public QMainWindow
+#include "aboutwindow.h"
+
+class MainWindow : public QMainWindow, private Ui::MainWindow
 {
     Q_OBJECT
+
+    Ui::MainWindow * ui;
+
+    AboutWindow * aboutWindow;
     
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     
-private:
-    Ui::MainWindow *ui;
+private slots:
+    void on_actionAbout_triggered();
 };
 
 #endif // MAINWINDOW_H

@@ -12,14 +12,20 @@ TARGET = KSerial
 TEMPLATE = app
 
 LIBS     += \
-        -lkdeui
+    -lkdeui
 
 SOURCES  += \
-        main.cpp \
-        mainwindow.cpp
+    main.cpp \
+    mainwindow.cpp \
+    aboutwindow.cpp
 
 HEADERS  += \
-        mainwindow.h
+    mainwindow.h \
+    aboutwindow.h
 
 FORMS    += \
-        mainwindow.ui
+    mainwindow.ui \
+    aboutwindow.ui
+
+RESOURCES += \
+    resources.qrc

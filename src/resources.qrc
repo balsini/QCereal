@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/logos/kde_logo.png</file>
+        <file>images/logos/qt_logo.png</file>
+    </qresource>
+</RCC>
