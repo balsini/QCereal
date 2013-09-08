@@ -24,6 +24,7 @@ public:
 private slots:
     void on_actionAbout_triggered();
     void on_RefreshDevices_released();
+    void on_DeviceComboBox_currentIndexChanged(const QString &arg1);
 };
 
 #endif // MAINWINDOW_H
