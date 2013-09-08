@@ -15,5 +15,5 @@ kde4_add_ui_files(KSerial_SRCS
   aboutwindow.ui
 )
 kde4_add_executable(KSerial ${KSerial_SRCS})
-target_link_libraries(KSerial ${KDE4_KDEUI_LIBS})
+target_link_libraries(KSerial ${KDE4_KDEUI_LIBS} ${KDE4_SOLID_LIBS})
 install(TARGETS KSerial ${INSTALL_TARGETS_DEFAULT_ARGS})

@@ -15,12 +15,15 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 
     AboutWindow * aboutWindow;
     
+    void updateSerialDevicesList();
+
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     
 private slots:
     void on_actionAbout_triggered();
+    void on_RefreshDevices_released();
 };
 
 #endif // MAINWINDOW_H
