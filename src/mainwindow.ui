@@ -112,7 +112,7 @@
               <item row="1" column="0">
                <widget class="QPushButton" name="RefreshDevices">
                 <property name="text">
-                 <string>Refresh</string>
+                 <string>&amp;Refresh</string>
                 </property>
                </widget>
               </item>
@@ -178,14 +178,14 @@
                 <item>
                  <widget class="QPushButton" name="DeviceOpen">
                   <property name="text">
-                   <string>Open</string>
+                   <string>&amp;Open</string>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QPushButton" name="DeviceClose">
                   <property name="text">
-                   <string>Close</string>
+                   <string>&amp;Close</string>
                   </property>
                  </widget>
                 </item>
@@ -228,7 +228,7 @@
                <x>0</x>
                <y>0</y>
                <width>159</width>
-               <height>272</height>
+               <height>289</height>
               </rect>
              </property>
              <attribute name="label">
@@ -270,7 +270,7 @@
                <x>0</x>
                <y>0</y>
                <width>159</width>
-               <height>272</height>
+               <height>289</height>
               </rect>
              </property>
              <attribute name="label">
@@ -282,14 +282,14 @@
                 <item>
                  <widget class="QCheckBox" name="LocalEchoCheckBox">
                   <property name="text">
-                   <string>Local Echo</string>
+                   <string>Lo&amp;cal Echo</string>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QCheckBox" name="CR_LF_CheckBox">
                   <property name="text">
-                   <string>CR LF auto</string>
+                   <string>CR LF &amp;auto</string>
                   </property>
                  </widget>
                 </item>
@@ -319,21 +319,21 @@
                 <item>
                  <widget class="QPushButton" name="SendBreakButton">
                   <property name="text">
-                   <string>Send Break</string>
+                   <string>Send &amp;Break</string>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QPushButton" name="ToggleDTRButton">
                   <property name="text">
-                   <string>Toggle DTR</string>
+                   <string>Toggle &amp;DTR</string>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QPushButton" name="ToggleRTSButton">
                   <property name="text">
-                   <string>Toggle RTS</string>
+                   <string>Toggle &amp;RTS</string>
                   </property>
                  </widget>
                 </item>
@@ -360,7 +360,7 @@
                <x>0</x>
                <y>0</y>
                <width>159</width>
-               <height>272</height>
+               <height>289</height>
               </rect>
              </property>
              <attribute name="label">
@@ -675,7 +675,7 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>&amp;File</string>
     </property>
     <addaction name="actionClear_screen"/>
     <addaction name="separator"/>
@@ -686,13 +686,13 @@
    </widget>
    <widget class="QMenu" name="menu">
     <property name="title">
-     <string>?</string>
+     <string>&amp;?</string>
     </property>
     <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
-     <string>Edit</string>
+     <string>&amp;Edit</string>
     </property>
     <addaction name="actionCopy"/>
     <addaction name="actionCopy_All"/>
@@ -700,7 +700,7 @@
    </widget>
    <widget class="QMenu" name="menuLog">
     <property name="title">
-     <string>Log</string>
+     <string>&amp;Log</string>
     </property>
     <addaction name="actionTo_File"/>
     <addaction name="separator"/>
@@ -711,7 +711,7 @@
    </widget>
    <widget class="QMenu" name="menuConfiguration">
     <property name="title">
-     <string>Configuration</string>
+     <string>Co&amp;nfiguration</string>
     </property>
     <addaction name="actionLoad"/>
     <addaction name="actionSave"/>
