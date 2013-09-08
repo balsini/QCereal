@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
                 // A displayable program name string.
                 ki18n("KSerial"),
                 // The program version string.
-                "0.01",
+                "0.0",
                 // Short description of what the app does.
                 ki18n("Serial port communication tool"),
                 // The license this code is released under
