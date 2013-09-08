@@ -1,23 +1,5 @@
 #include "mainwindow.h"
 
-#include <solid/devicenotifier.h>
-#include <solid/device.h>
-
-#include <QFile>
-
-void MainWindow::updateSerialDevicesList()
-{
-    QString tmp;
-    ui->DeviceComboBox->clear();
-    foreach (const Solid::Device &device,
-             Solid::Device::listFromType(Solid::DeviceInterface::SerialInterface,
-                                         QString())) {
-        tmp = device.udi();
-        tmp.remove(0,tmp.indexOf("tty/tty"));
-        ui->DeviceComboBox->addItem(tmp);
-    }
-}
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -28,7 +10,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->setWindowTitle("KSerial");
 
-    updateSerialDevicesList();
+    connect(&serial, SIGNAL(newSerialDeviceFound(QString)), this, SLOT(newSerialDeviceFound(QString)));
+    connect(this, SIGNAL(updateSerialDevicesList()), &serial, SLOT(updateSerialDevicesList()));
+
+    on_RefreshDevices_released();
 }
 
 MainWindow::~MainWindow()
@@ -43,38 +28,31 @@ void MainWindow::on_actionAbout_triggered()
 
 void MainWindow::on_RefreshDevices_released()
 {
-    updateSerialDevicesList();
+    ui->DeviceComboBox->clear();
+    emit updateSerialDevicesList();
 }
 
-void MainWindow::on_DeviceComboBox_currentIndexChanged(const QString &arg1)
+void MainWindow::newSerialDeviceFound(QString deviceName)
 {
-    foreach (const Solid::Device &device,
-             Solid::Device::listFromType(Solid::DeviceInterface::SerialInterface,
-                                         QString())) {
-        if (device.udi().contains(arg1)) {
-            // Prints the device information
-            QString vendor = device.vendor();
-            if (vendor.length() > 0)
-                vendor.append(": ");
-            ui->DeviceDescription->setText(vendor + device.product());
+    ui->DeviceComboBox->addItem(deviceName);
+}
 
-            // Checks device permissions
-            QString dev_name = device.udi();
-            dev_name.remove(0,dev_name.lastIndexOf("tty"));
-            QFile dev("/dev/" + dev_name);
-            if (dev.open(QIODevice::ReadOnly)) {
-                ui->DeviceReadPermission->setText("Read: <span style=\"background-color:lightgreen\">YES</span>");
-                dev.close();
-            } else {
-                ui->DeviceReadPermission->setText("Read: <span style=\"background-color:red\">NO</span>");
-            }
-            if (dev.open(QIODevice::WriteOnly)) {
-                ui->DeviceWritePermission->setText("Write: <span style=\"background-color:lightgreen\">YES</span>");
-                dev.close();
-            } else {
-                ui->DeviceWritePermission->setText("Write: <span style=\"background-color:red\">NO</span>");
-            }
-            return;
-        }
-    }
+void MainWindow::on_DeviceComboBox_currentIndexChanged(const QString &deviceName)
+{
+    SerialDeviceInfo deviceInfo = serial.info(deviceName);
+
+    if (deviceInfo.readPermission)
+        ui->DeviceReadPermission->setText("Read: <span style=\"background-color:lightgreen\">YES</span>");
+    else
+        ui->DeviceReadPermission->setText("Read: <span style=\"background-color:red\">NO</span>");
+
+    if (deviceInfo.writePermission)
+        ui->DeviceWritePermission->setText("Write: <span style=\"background-color:lightgreen\">YES</span>");
+    else
+        ui->DeviceWritePermission->setText("Write: <span style=\"background-color:red\">NO</span>");
+
+    if (deviceInfo.vendor.length() > 0)
+        ui->DeviceDescription->setText(deviceInfo.vendor + ": " + deviceInfo.product);
+    else
+        ui->DeviceDescription->setText(deviceInfo.vendor + ": " + deviceInfo.product);
 }

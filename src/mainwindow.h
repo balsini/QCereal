@@ -6,6 +6,7 @@
 #include "ui_mainwindow.h"
 
 #include "aboutwindow.h"
+#include "serial.h"
 
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
@@ -14,17 +15,23 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
     Ui::MainWindow * ui;
 
     AboutWindow * aboutWindow;
-    
-    void updateSerialDevicesList();
+
+    Serial serial;
+
+private slots:
+    void on_actionAbout_triggered();
+    void on_RefreshDevices_released();
+    void on_DeviceComboBox_currentIndexChanged(const QString &deviceName);
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     
-private slots:
-    void on_actionAbout_triggered();
-    void on_RefreshDevices_released();
-    void on_DeviceComboBox_currentIndexChanged(const QString &arg1);
+public slots:
+    void newSerialDeviceFound(QString deviceName);
+
+signals:
+    void updateSerialDevicesList();
 };
 
 #endif // MAINWINDOW_H

@@ -6,6 +6,7 @@ set(KSerial_SRCS
   main.cpp
   mainwindow.cpp
   aboutwindow.cpp
+  serial.cpp
 )
 qt4_add_resources(KSerial_SRCS
   resources.qrc

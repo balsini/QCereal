@@ -17,11 +17,13 @@ LIBS     += \
 SOURCES  += \
     main.cpp \
     mainwindow.cpp \
-    aboutwindow.cpp
+    aboutwindow.cpp \
+    serial.cpp
 
 HEADERS  += \
     mainwindow.h \
-    aboutwindow.h
+    aboutwindow.h \
+    serial.h
 
 FORMS    += \
     mainwindow.ui \
