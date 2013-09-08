@@ -54,5 +54,5 @@ void MainWindow::on_DeviceComboBox_currentIndexChanged(const QString &deviceName
     if (deviceInfo.vendor.length() > 0)
         ui->DeviceDescription->setText(deviceInfo.vendor + ": " + deviceInfo.product);
     else
-        ui->DeviceDescription->setText(deviceInfo.vendor + ": " + deviceInfo.product);
+        ui->DeviceDescription->setText(deviceInfo.vendor + deviceInfo.product);
 }
