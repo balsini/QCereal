@@ -2,6 +2,9 @@
 #define SERIALSETUP_H
 
 #include <QWidget>
+#include <QSerialPort>
+
+#include <QDebug>
 
 namespace Ui {
   class SerialSetup;
@@ -9,20 +12,41 @@ namespace Ui {
 
 class SerialSetup : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  Ui::SerialSetup *ui;
-  void refreshPortNames();
+    Ui::SerialSetup *ui;
+    int refreshPortNames();
+    bool portConnected;
 
-public:
-  explicit SerialSetup(QWidget *parent = 0);
-  ~SerialSetup();
+    QString portName;
+    QSerialPort::BaudRate baudRate;
+    QSerialPort::DataBits dataBits;
+    QSerialPort::Parity parity;
+    QSerialPort::Parity parityBits;
+    QSerialPort::StopBits stopBits;
+    QSerialPort::FlowControl flowControl;
+    bool localEcho;
 
-private slots:
-  void refreshButtonClicked() {
-    refreshPortNames();
-  }
-  void on_buttonConnect_clicked();
+  public:
+    explicit SerialSetup(QWidget *parent = 0);
+    ~SerialSetup();
+
+  signals:
+    void serialConnected(QSerialPort *);
+
+
+  private slots:
+    void refreshButtonClicked();
+    void connectButtonClicked();
+
+    void serialPortChanged(QString s);
+    void flowControlChanged(QString s);
+
+    void baudRateChanged(QString s);
+    void dataChanged(QString s);
+    void stopBitsChanged(QString s);
+    void parityChanged(QString s);
+    void localEchoChanged(bool s);
 };
 
 #endif // SERIALSETUP_H

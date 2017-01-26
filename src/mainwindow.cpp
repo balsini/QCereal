@@ -12,17 +12,19 @@ MainWindow::MainWindow(QWidget *parent) :
 {
   ui->setupUi(this);
 
-  ss = new QDockWidget(tr("Bench Status"), this);
+  ss = new QDockWidget(this);
   //ss->setFeatures(QDockWidget::NoDockWidgetFeatures);
   //pc->setAllowedAreas(Qt::RightDockWidgetArea);
   ss->setWidget(new SerialSetup(this));
   addDockWidget(Qt::LeftDockWidgetArea, ss);
 
-  Console * console = new Console(this);
+  Console *console = new Console(this);
   console->setEnabled(false);
   setCentralWidget(console);
 
-  http://doc.qt.io/qt-5/qtserialport-terminal-example.html
+  connect(ss->widget(), SIGNAL(serialConnected(QSerialPort *)), this, SLOT(serialConnected(QSerialPort *)));
+
+  //http://doc.qt.io/qt-5/qtserialport-terminal-example.html
 }
 
 MainWindow::~MainWindow()

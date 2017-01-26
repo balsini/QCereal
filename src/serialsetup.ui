@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>266</width>
-    <height>288</height>
+    <width>552</width>
+    <height>418</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="buttonRefresh">
+      <widget class="QPushButton" name="refreshButton">
        <property name="text">
         <string>Refresh</string>
        </property>
@@ -28,12 +28,12 @@
        <item>
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>Serial Port</string>
+          <string>Port</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboPort"/>
+        <widget class="QComboBox" name="portCombo"/>
        </item>
       </layout>
      </item>
@@ -47,20 +47,10 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBaud">
+        <widget class="QComboBox" name="baudCombo">
          <property name="currentIndex">
-          <number>7</number>
+          <number>0</number>
          </property>
-         <item>
-          <property name="text">
-           <string>300</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>600</string>
-          </property>
-         </item>
          <item>
           <property name="text">
            <string>1200</string>
@@ -83,17 +73,7 @@
          </item>
          <item>
           <property name="text">
-           <string>14400</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
            <string>19200</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>28800</string>
           </property>
          </item>
          <item>
@@ -103,27 +83,12 @@
          </item>
          <item>
           <property name="text">
-           <string>56000</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
            <string>57600</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>128000</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
            <string>115200</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>256000</string>
           </property>
          </item>
         </widget>
@@ -140,9 +105,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboData">
+        <widget class="QComboBox" name="dataCombo">
          <property name="currentIndex">
-          <number>3</number>
+          <number>1</number>
          </property>
          <item>
           <property name="text">
@@ -178,9 +143,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboStop">
+        <widget class="QComboBox" name="stopCombo">
          <property name="currentIndex">
-          <number>0</number>
+          <number>2</number>
          </property>
          <item>
           <property name="text">
@@ -211,7 +176,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboParity">
+        <widget class="QComboBox" name="parityCombo">
          <property name="currentIndex">
           <number>2</number>
          </property>
@@ -245,7 +210,64 @@
       </layout>
      </item>
      <item>
-      <widget class="QPushButton" name="buttonConnect">
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <item>
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>Flow Ctrl</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="flowCombo">
+         <property name="currentIndex">
+          <number>2</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>None</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>SW</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>HW</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Local Echo</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="echoCheckBox">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="connectButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>Connect</string>
        </property>
@@ -258,23 +280,159 @@
  <resources/>
  <connections>
   <connection>
-   <sender>buttonRefresh</sender>
+   <sender>refreshButton</sender>
    <signal>clicked()</signal>
-   <receiver>SerialGraphicalInterface</receiver>
+   <receiver>SerialSetup</receiver>
    <slot>refreshButtonClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>118</x>
-     <y>25</y>
+     <x>534</x>
+     <y>18</y>
     </hint>
     <hint type="destinationlabel">
-     <x>5</x>
-     <y>17</y>
+     <x>550</x>
+     <y>15</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>portCombo</sender>
+   <signal>currentTextChanged(QString)</signal>
+   <receiver>SerialSetup</receiver>
+   <slot>serialPortChanged(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>520</x>
+     <y>62</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>548</x>
+     <y>62</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>baudCombo</sender>
+   <signal>currentTextChanged(QString)</signal>
+   <receiver>SerialSetup</receiver>
+   <slot>baudRateChanged(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>522</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>549</x>
+     <y>108</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dataCombo</sender>
+   <signal>currentTextChanged(QString)</signal>
+   <receiver>SerialSetup</receiver>
+   <slot>dataChanged(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>525</x>
+     <y>159</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>549</x>
+     <y>155</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>stopCombo</sender>
+   <signal>currentTextChanged(QString)</signal>
+   <receiver>SerialSetup</receiver>
+   <slot>stopBitsChanged(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>514</x>
+     <y>208</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>550</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>parityCombo</sender>
+   <signal>currentTextChanged(QString)</signal>
+   <receiver>SerialSetup</receiver>
+   <slot>parityChanged(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>529</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>551</x>
+     <y>253</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>flowCombo</sender>
+   <signal>currentTextChanged(QString)</signal>
+   <receiver>SerialSetup</receiver>
+   <slot>flowControlChanged(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>521</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>550</x>
+     <y>295</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>echoCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SerialSetup</receiver>
+   <slot>localEchoChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>289</x>
+     <y>349</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>553</x>
+     <y>330</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>connectButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SerialSetup</receiver>
+   <slot>connectButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>527</x>
+     <y>391</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>550</x>
+     <y>377</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
   <slot>refreshButtonClicked()</slot>
+  <slot>serialPortChanged(QString)</slot>
+  <slot>baudRateChanged(QString)</slot>
+  <slot>dataChanged(QString)</slot>
+  <slot>stopBitsChanged(QString)</slot>
+  <slot>parityChanged(QString)</slot>
+  <slot>flowControlChanged(QString)</slot>
+  <slot>localEchoChanged(bool)</slot>
+  <slot>connectButtonClicked()</slot>
  </slots>
 </ui>
