@@ -4,7 +4,6 @@
 #include "ui_mainwindow.h"
 
 #include "serialsetup.h"
-#include "console.h"
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
@@ -18,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
   ss->setWidget(new SerialSetup(this));
   addDockWidget(Qt::LeftDockWidgetArea, ss);
 
-  Console *console = new Console(this);
+  console = new Console(this);
   console->setEnabled(false);
   setCentralWidget(console);
 
@@ -30,4 +29,30 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
   delete ui;
+}
+
+void MainWindow::serialConnected(QSerialPort *p)
+{
+  serial = p;
+  serial->setParent(this);
+
+  qDebug() << "Serial port connected to MainWindow";
+
+  console->setEnabled(true);
+  connect(serial, &QSerialPort::readyRead, this, &MainWindow::readData);
+  /*
+  console->setLocalEchoEnabled(p.localEchoEnabled);
+  ui->actionConnect->setEnabled(false);
+  ui->actionDisconnect->setEnabled(true);
+  ui->actionConfigure->setEnabled(false);
+  showStatusMessage(tr("Connected to %1 : %2, %3, %4, %5, %6")
+                    .arg(p.name).arg(p.stringBaudRate).arg(p.stringDataBits)
+                    .arg(p.stringParity).arg(p.stringStopBits).arg(p.stringFlowControl));
+                    */
+}
+
+void MainWindow::readData()
+{
+  QByteArray data = serial->readAll();
+  console->putData(data);
 }

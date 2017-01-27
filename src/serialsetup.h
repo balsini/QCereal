@@ -22,7 +22,6 @@ class SerialSetup : public QWidget
     QSerialPort::BaudRate baudRate;
     QSerialPort::DataBits dataBits;
     QSerialPort::Parity parity;
-    QSerialPort::Parity parityBits;
     QSerialPort::StopBits stopBits;
     QSerialPort::FlowControl flowControl;
     bool localEcho;

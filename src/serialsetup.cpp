@@ -51,37 +51,25 @@ void SerialSetup::connectButtonClicked()
     qDebug() << "name: " << portName;
     qDebug() << "baud: " << baudRate;
     qDebug() << "data: " << dataBits;
-    qDebug() << "parity bits: " << parityBits;
     qDebug() << "stop: " << stopBits;
     qDebug() << "parity: " << parity;
     qDebug() << "flow: " << flowControl;
     qDebug() << "echo: " << localEcho;
 
     QSerialPort *serial = new QSerialPort();
-/*
-    serial->setPortName(ui->comboBaud->itemText(ui->comboBaud->currentIndex()));
-    serial->setBaudRate(ui->comboBaud->itemText(ui->comboBaud->currentIndex()).toInt());
-    serial->setDataBits(ui->comboData->itemText(ui->comboData->currentIndex()));
-    serial->setParity(ui->comboParity->itemText(ui->comboParity->currentIndex()));
-    serial->setStopBits(ui->comboStop->itemText(ui->comboStop->currentIndex()));
-    //serial->setFlowControl(p.flowControl);
+
+    serial->setPortName(portName);
+    serial->setBaudRate(baudRate);
+    serial->setDataBits(dataBits);
+    serial->setParity(parity);
+    serial->setStopBits(stopBits);
+    serial->setFlowControl(flowControl);
+
     if (serial->open(QIODevice::ReadWrite)) {
-        console->setEnabled(true);
-        console->setLocalEchoEnabled(p.localEchoEnabled);
-        ui->actionConnect->setEnabled(false);
-        ui->actionDisconnect->setEnabled(true);
-        ui->actionConfigure->setEnabled(false);
-        showStatusMessage(tr("Connected to %1 : %2, %3, %4, %5, %6")
-                          .arg(p.name).arg(p.stringBaudRate).arg(p.stringDataBits)
-                          .arg(p.stringParity).arg(p.stringStopBits).arg(p.stringFlowControl));
-
-        emit serialConnected(p);
+        emit serialConnected(serial);
     } else {
-        QMessageBox::critical(this, tr("Error"), serial->errorString());
-
-        showStatusMessage(tr("Open error"));
+        qDebug() << "Error" << serial->errorString();
     }
-*/
     /*
         message_manager->connect_to_serial(ui->comboPort->itemText(ui->comboPort->currentIndex()),
                                           ui->comboBaud->itemText(ui->comboBaud->currentIndex()),
