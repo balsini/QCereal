@@ -23,6 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
   connect(ss->widget(), SIGNAL(serialConnected(QSerialPort *)), this, SLOT(serialConnected(QSerialPort *)));
 
+  connect(ss->widget(), SIGNAL(notifyLocalEchoChanged(bool)), console, SLOT(setLocalEchoEnabled(bool)));
+
+  connect(console, SIGNAL(getData(QByteArray)), this, SLOT(writeData(QByteArray)));
   //http://doc.qt.io/qt-5/qtserialport-terminal-example.html
 }
 
@@ -55,4 +58,10 @@ void MainWindow::readData()
 {
   QByteArray data = serial->readAll();
   console->putData(data);
+}
+
+void MainWindow::writeData(QByteArray data)
+{
+  qDebug() << "written: " << data;
+  serial->write(data);
 }

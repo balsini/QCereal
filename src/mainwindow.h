@@ -29,6 +29,7 @@ class MainWindow : public QMainWindow
   public slots:
     void serialConnected(QSerialPort *p);
     void readData();
+    void writeData(QByteArray data);
 };
 
 #endif // MAINWINDOW_H

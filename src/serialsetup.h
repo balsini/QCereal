@@ -32,7 +32,7 @@ class SerialSetup : public QWidget
 
   signals:
     void serialConnected(QSerialPort *);
-
+    void notifyLocalEchoChanged(bool val);
 
   private slots:
     void refreshButtonClicked();

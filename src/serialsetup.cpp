@@ -34,7 +34,7 @@ SerialSetup::SerialSetup(QWidget *parent) :
   ui->parityCombo->setCurrentIndex(0);
   ui->flowCombo->setCurrentIndex(0);
 
-  ui->echoCheckBox->setChecked(true);
+  ui->echoCheckBox->setChecked(false);
 }
 
 SerialSetup::~SerialSetup()
@@ -132,7 +132,8 @@ void SerialSetup::flowControlChanged(QString s)
   }
 }
 
-void SerialSetup::baudRateChanged(QString s) {
+void SerialSetup::baudRateChanged(QString s)
+{
   qDebug() << "baudRateChanged to " << s;
 
   switch (s.toInt()) {
@@ -209,7 +210,8 @@ void SerialSetup::stopBitsChanged(QString s)
   }
 }
 
-void SerialSetup::parityChanged(QString s) {
+void SerialSetup::parityChanged(QString s)
+{
   qDebug() << "parityChanged to " << s;
 
   if (s == "None") {
@@ -234,8 +236,11 @@ void SerialSetup::parityChanged(QString s) {
   }
 }
 
-void SerialSetup::localEchoChanged(bool s) {
+void SerialSetup::localEchoChanged(bool s)
+{
   qDebug() << "localEchoChanged to" << s;
 
   localEcho = s;
+
+  emit notifyLocalEchoChanged(s);
 }

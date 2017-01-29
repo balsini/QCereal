@@ -41,23 +41,25 @@ class Console : public QPlainTextEdit
 {
     Q_OBJECT
 
-signals:
-    void getData(const QByteArray &data);
 
-public:
+  public:
     explicit Console(QWidget *parent = 0);
 
     void putData(const QByteArray &data);
 
+  public slots:
     void setLocalEchoEnabled(bool set);
 
-protected:
+  signals:
+    void getData(QByteArray data);
+
+  protected:
     virtual void keyPressEvent(QKeyEvent *e);
     virtual void mousePressEvent(QMouseEvent *e);
     virtual void mouseDoubleClickEvent(QMouseEvent *e);
     virtual void contextMenuEvent(QContextMenuEvent *e);
 
-private:
+  private:
     bool localEchoEnabled;
 
 };
